@@ -9,13 +9,10 @@ Requirements:
 5. Return the data as string
 6. Provide option to output the data as HTML
 """
-
 from datetime import datetime
 
 from helpers import clean_cust_no, format_date_to_utc, convert_data_to_string, convert_data_to_html
 
-# Data file path
-file_path = './example.txt'
 # Regex pattern where we search for substring starting with a capital letter followed by
 # one or more number or capital letter
 cust_no_pattern = '[A-Z][\dA-Z]+'
@@ -25,7 +22,14 @@ cust_no_int_fixes = [('O', '0'), ]
 datetime_format = '%d/%m/%Y %H:%M'
 
 
-def main(html: bool = False) -> str:
+def main() -> None:
+    # Ask the user for file path
+    file_path = input("Enter file path. If none given default 'example.txt' will be used: ")
+    if not file_path:
+        file_path = './example.txt'
+    # Ask the user for output format
+    html = True if input("Do you wish to return the output as HTML? (Y/N): ").capitalize() == "Y" else False
+
     columns = None
     content = list()
     now = datetime.now().strftime(datetime_format)
@@ -44,13 +48,13 @@ def main(html: bool = False) -> str:
 
     if html:
         print(convert_data_to_html(columns, content))
-        return convert_data_to_html(columns, content)
+        # return convert_data_to_html(columns, content)
     else:
         # Add column names to the rest of data
         content.insert(0, columns)
         print(convert_data_to_string(content))
-        return convert_data_to_string(content)
+        # return convert_data_to_string(content)
 
 
 if __name__ == '__main__':
-    main(html=True)
+    main()
