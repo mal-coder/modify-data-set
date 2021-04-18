@@ -2,7 +2,7 @@
 # Process Data App
 Small application to clean and process data with possibility to return the output both as str and html
 
-# Process Data App code formatting
+### Process Data App code formatting
 Function and variable type annotations are used in the code.
 
 ## Prerequisites
